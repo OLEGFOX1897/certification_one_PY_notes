@@ -50,7 +50,7 @@ def list_notes(list):
     if action == 1:
         play_note(list)
     elif action == 2:
-        print('no release')
+        sorted_data(list)
     elif action == 3:
         main_menu(list)
     else:
@@ -92,7 +92,9 @@ def play_note(list):
         play_note(list)
 
 def sorted_data(list):
-    return 0
+    new_list=work_list.sort_date(list)
+    print_notes(new_list)
+    list_notes(list)
 
 
 def edit_note(id, list):
