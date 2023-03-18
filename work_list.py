@@ -34,9 +34,16 @@ def del_note(id, list):
 
 
 def sort_date(list):  # no realese
-    list = sorted(list,
-        key=lambda x: datetime.strptime(x['date'], '%d/%m/%Y'), reverse=False)
-    return list
+    list_date=[]
+    for i in range(1,len(list),1):
+        list_date.append(list[i][1])
+    list_date_sort=sorted(list_date)
+    new_list=[]
+    for i in range(0,len(list_date_sort),1):
+        for j in range(0,len(list),1):
+            if list_date_sort[i]==list[j][1]:
+                new_list.append(list[j])
+    return new_list
 
 
 def find_note(id, list):

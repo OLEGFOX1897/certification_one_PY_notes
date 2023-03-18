@@ -92,9 +92,41 @@ def play_note(list):
         play_note(list)
 
 def sorted_data(list):
+    print('-----------------------------------------------------------------------------------------')
+    print('ОТСОРТИРОВАННЫЙ СПИСОК ЗАМЕТОК ПО ДАТЕ')
     new_list=work_list.sort_date(list)
     print_notes(new_list)
-    list_notes(list)
+    print('-----------------------------------------------------------------------------------------')
+    print('Введите номер id заметки для ее просмотра/редактирования/удаления или 0, чтобы вернуться в основное меню:')
+    action_one = clean_input_error.inp_num(1)
+    finish_note = int(list[len(list)-1][0])
+    if action_one == 0:
+        main_menu(list)
+    elif action_one > 0 and action_one <= finish_note:
+        list_note = work_list.find_note(action_one, list)
+        print("Заголовок заметки: "+list_note[2])
+        print("Текст заметки: "+list_note[3])
+        print("Создана: "+list_note[0])
+        print("В: "+list_note[1])
+        print('-----------------------------------------------------------------------------------------')
+        print(f"1. Для редактирования", '2. Для удаления',
+              '3. Вернуться к списку заметок', "Введите вариант действия:", sep='\n')
+        action_two = clean_input_error.inp_num(1)
+        if action_two == 3:
+            list_notes(list)
+        elif action_two == 1:
+            edit_note(action_one, list)
+        elif action_two == 2:
+            del_note(action_one, list)
+        else:
+            print(
+                '-----------------------------------------------------------------------------------------')
+            print('Неверный ввод варианта действия с заметкой. Повторите ввод!')
+            play_note(list)
+    else:
+        print('-----------------------------------------------------------------------------------------')
+        print('Такой заметки нет. Повторите ввод')
+        play_note(list)
 
 
 def edit_note(id, list):
